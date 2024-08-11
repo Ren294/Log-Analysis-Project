@@ -4,6 +4,12 @@
 
 The primary goal of this project is to develop a scalable and fault-tolerant log analytics pipeline based on the Lambda architecture. The system ingests, processes, and analyzes NASA server logs in both real-time and batch modes. This enables immediate insights for real-time monitoring and generates comprehensive reports for periodic analysis.
 
+## Datasets Selection
+NASA access log dataset 1995:
+- <a href = https://ita.ee.lbl.gov/html/contrib/NASA-HTTP.html> Actual NASA Logs </a>
+- <a href = https://www.kaggle.com/souhagaa/nasa-access-log-dataset-1995/download> Kaggle </a>
+
+This dataset is particularly valuable for several reasons. First, it captures a high volume of real-world web traffic, providing a realistic basis for our analysis. Secon d, the data spans different times of the day and days of the week, enabling us to id entify patterns and trends in server usage. Lastly, the inclusion of various HTTP res ponse codes and byte sizes allows us to assess not only the traffic but also the ser ver's performance and potential issues such as error rates and load.
 ## System Architecture
 The system is divided into several layers, each responsible for specific tasks within the log analytics process:
 
