@@ -26,13 +26,17 @@ df_1 = df.select(
     split(col("value"), ",").getItem(6).alias("bytes").cast(IntegerType()),
 ).withColumn('time_added', unix_timestamp().cast("timestamp"))\
 .withColumn("extension", when(split_logic.isNull(), "None").otherwise(split_logic))
+
 df_1 = df_1.na.drop(subset=["host", "time"])
+
 def process_row(df, epoch_id):
     df.write\
     .format("org.apache.spark.sql.cassandra")\
     .mode('append')\
-    .options(table="log", keyspace="loganalysis")\
+    .options(table="nasalog", keyspace="loganalysis")\
     .save()
+    df.write.mode("append").csv("hdfs://localhost:9000/output/nasa_log")
+
 df_1 \
     .writeStream \
     .option("checkpointLocation", "file:///home/nhomb/Document/checkpoint") \
