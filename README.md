@@ -26,7 +26,7 @@
 
 # Project Objective
 
-The primary goal of this project is to develop a scalable and fault-tolerant log analytics pipeline based on the Lambda architecture. The system ingests, processes, and analyzes NASA server logs in both real-time and batch modes. This enables immediate insights for real-time monitoring and generates comprehensive reports for periodic analysis.
+The primary goal of this project is to develop a scalable and fault-tolerant log analytics pipeline based on the `Lambda architecture`. The system ingests, processes, and analyzes NASA server logs in both real-time and batch modes. This enables immediate insights for real-time monitoring and generates comprehensive reports for periodic analysis.
 
 # Datasets Selection
 NASA access log dataset 1995:
@@ -47,40 +47,40 @@ The system is divided into several layers, each responsible for specific tasks w
 </center>
 
 ## Ingestion Layer
-- **Apache NiFi**: Efficiently ingests NASA logs from various sources, enabling flexible and scalable data flow management.
+- **`Apache NiFi`**: Efficiently ingests NASA logs from various sources, enabling flexible and scalable data flow management.
 
 ## Speed Layer
-- **Apache Kafka**: Serves as a high-throughput, low-latency message broker, handling real-time data streams.
-- **Apache Spark Streaming**: Processes data streams in real-time, enabling immediate analytics and rapid response to events. Integrates seamlessly with Kafka for continuous log processing.
+- **`Apache Kafka`**: Serves as a high-throughput, low-latency message broker, handling real-time data streams.
+- **`Apache Spark Streaming`**: Processes data streams in real-time, enabling immediate analytics and rapid response to events. Integrates seamlessly with Kafka for continuous log processing.
 
 ## Batch Layer
-- **Hadoop HDFS**: Acts as the primary storage for large volumes of log data, ensuring high availability and scalability.
-- **Apache Spark**: Performs batch processing on data stored in HDFS, facilitating complex data analysis tasks.
-- **Apache Hive**: Provides a data warehouse infrastructure, enabling efficient querying and analysis of large datasets stored in HDFS.
+- **`Hadoop HDFS`**: Acts as the primary storage for large volumes of log data, ensuring high availability and scalability.
+- **`Apache Spark`**: Performs batch processing on data stored in HDFS, facilitating complex data analysis tasks.
+- **`Apache Hive`**: Provides a data warehouse infrastructure, enabling efficient querying and analysis of large datasets stored in HDFS.
 
 ## Serving Layer
-- **Apache Cassandra**: Stores processed data with fast read/write capabilities, particularly useful for real-time analytics.
+- **`Apache Cassandra`**: Stores processed data with fast read/write capabilities, particularly useful for real-time analytics.
 
 ## Analytics Layer
-- **Grafana**: Offers real-time visualization of log data through dynamic dashboards and alerts.
-- **Power BI**: Generates detailed daily, monthly, and periodic reports, providing deep insights through comprehensive visualizations.
+- **`Grafana`**: Offers real-time visualization of log data through dynamic dashboards and alerts.
+- **`Power BI`**: Generates detailed daily, monthly, and periodic reports, providing deep insights through comprehensive visualizations.
 
 # Technologies Used
 
-- **Operating System**: The project is deployed on Ubuntu Server for the backend processes, with some components like Power BI running on Windows.
-- **Programming Languages**: Python is the primary programming language used for developing the various components of the pipeline.
+- **Operating System**: The project is deployed on `Ubuntu Server` for the backend processes, with some components like `Power BI` running on Windows.
+- **Programming Languages**: `Python` is the primary programming language used for developing the various components of the pipeline.
 - **Libraries and Frameworks**: 
-  - Apache NiFi for data ingestion.
-  - Apache Apache Kafka for real-time data streaming.
-  - Apache Spark for both real-time and batch data processing.
-  - Hadoop HDFS for distributed data storage.
-  - Apache Hive for data warehousing and querying.
-  - Apache Cassandra for fast, distributed data storage.
-  - Grafana for real-time data visualization.
-  - Power BI for creating detailed reports and dashboards.
+  - `Apache NiFi` for data ingestion.
+  - `Apache Kafka` for real-time data streaming.
+  - `Apache Spark` for both real-time and batch data processing.
+  - `Hadoop HDFS` for distributed data storage.
+  - `Apache Hive` for data warehousing and querying.
+  - `Apache Cassandra` for fast, distributed data storage.
+  - `Grafana` for real-time data visualization.
+  - `Power BI` for creating detailed reports and dashboards.
 - **Database**:
-  - Cassandra is used for real-time data storage
-  - Hive is employed for executing batch queries against the stored data.
+  - `Cassandra` is used for real-time data storage
+  - `Hive` is employed for executing batch queries against the stored data.
   
 # Installation and Deployment
 
@@ -100,7 +100,7 @@ The system is divided into several layers, each responsible for specific tasks w
 - The installation involves setting up Java, Python, and the big data tools (Hadoop, Spark, Kafka, etc.) to ensure all components are correctly configured and ready for deployment.
 
 ## Running the Project
-### 1. Start Apache Cassandra
+### 1. Start `Apache Cassandra`
 **1.1 Run Cassandra server**
 
   ```
@@ -159,7 +159,7 @@ The system is divided into several layers, each responsible for specific tasks w
   TRUNCATE TABLE loganalysis.nasalog;
   ```
   
-### 2. Start Apache Kafka
+### 2. Start `Apache Kafka`
 **2.1 Run Kafka server**
 - Generate a new cluster ID:
   
@@ -209,7 +209,7 @@ The system is divided into several layers, each responsible for specific tasks w
     --bootstrap-server localhost:9092
   ```
   
-### 3. Start Apache Hadoop
+### 3. Start `Apache Hadoop`
 **3.1 Configure Hadoop**
 - Follow instructions: [HadoopSingleCluster](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html)
   
@@ -226,7 +226,7 @@ The system is divided into several layers, each responsible for specific tasks w
   hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.1.jar pi 4 100
   ```
   
-### 4. Start Apache NiFi
+### 4. Start `Apache NiFi`
 **4.1 Run Nifi**
 - Run the NiFi server:
   
@@ -249,7 +249,7 @@ The system is divided into several layers, each responsible for specific tasks w
     <img src="image/nifi.jpeg" width="900" />
   </center>
 
-### 5. Load Streaming Data into Cassandra and HDFS:
+### 5. Load Streaming Data into `Cassandra` and `HDFS`:
 - Submit Spark applications for Data Streaming Processing:
 
   ```
@@ -260,7 +260,7 @@ The system is divided into several layers, each responsible for specific tasks w
     streaming.py
   ```
 
-### 6. Start Apache Hive
+### 6. Start `Apache Hive`
 **6.1 Configure Hive**
 - Follow instructions: [HiveGettingStarted](https://cwiki.apache.org/confluence/display/Hive/GettingStarted)
   
@@ -268,7 +268,7 @@ The system is divided into several layers, each responsible for specific tasks w
 - Run the schematool initialization:
   
   ```
-    schematool -dbType <db type> -initSchema
+  schematool -dbType <db type> -initSchema
   ```
 
 - Start the Hive Metastore service:
@@ -283,7 +283,7 @@ The system is divided into several layers, each responsible for specific tasks w
   start-thiftserver.sh
   ```
   
-### 7. Process Data and Load into Hive:
+### 7. Process Data and Load into `Hive`:
 - Submit Spark applications for Data Processing:
   
   ```
@@ -293,7 +293,7 @@ The system is divided into several layers, each responsible for specific tasks w
     load.py
   ```
 
-### 8. Visual periodic visualizations with Power BI
+### 8. Visual periodic visualizations with `Power BI`
 **8.1 Start Power BI**
 - Open Power BI with other machine in Window OS
 - Start Power BI Desktop and create report
@@ -320,7 +320,7 @@ The system is divided into several layers, each responsible for specific tasks w
       <img src="image/visualBI.jpeg" width="900" />
   </center>
 
-### 9. Create Real-time visualizations with Grafana
+### 9. Create Real-time visualizations with `Grafana`
 
 **9.1 Start Grafana service**
 
@@ -361,16 +361,16 @@ The system is divided into several layers, each responsible for specific tasks w
 ### Common Issues
 
 **1. Kafka Broker Connection Issues**
-- Ensure the Kafka broker is correctly configured and that the server.properties file contains the correct settings.
+- Ensure the `Kafka broker` is correctly configured and that the server.properties file contains the correct settings.
 Check that the broker is running and reachable from the network.
 
 **2. Cassandra Connectivity Issues**
-- Ensure the Cassandra server is up and running, and that the correct IP address and port are specified in the connection settings.
+- Ensure the `Cassandra server` is up and running, and that the correct IP address and port are specified in the connection settings.
 - Validate that the keyspace and table have been created as required.
 
 **3. Hadoop Resource Manager Not Starting**
-- Verify that Java is correctly installed and configured on your system.
-- Ensure that HDFS and YARN services are correctly initialized and that no other conflicting services are running on the same ports.
+- Verify that `Java` is correctly installed and configured on your system.
+- Ensure that `HDFS` and `YARN` services are correctly initialized and that no other conflicting services are running on the same ports.
 
 ### Logs and Monitoring
 
@@ -380,17 +380,20 @@ NiFi logs are stored in the logs directory within the NiFi installation director
 
     cd $NIFI_HOME/logs/
     
-**2. Kafka Logs**
+**2.Kafka Logs**
+
 Kafka logs are located in the logs directory within the Kafka installation. Inspect these logs to diagnose issues related to message delivery and broker connectivity.
 
     cd $KAFKA_HOME/logs/
     
 **3. Spark Logs**
+
 Spark logs can be found in the logs directory of your Spark installation. These logs contain information about the execution of your Spark applications, including details of any errors encountered.
 
     cd $SPARK_HOME/logs/
     
 **4. Cassandra Logs**
+
 Cassandra logs reside in the /var/log/cassandra directory. Review these logs for any issues related to data storage and query execution.
     
     cd $CASSANDRA_HOME/logs/
@@ -407,13 +410,13 @@ Cassandra logs reside in the /var/log/cassandra directory. Review these logs for
 
 # Results and Analysis
 
-- **Real-time Monitoring**: Provides immediate insights through Grafana dashboards with critical event alerts.
+- **Real-time Monitoring**: Provides immediate insights through `Grafana` dashboards with critical event alerts.
 
   <center>
       <img src="image/grafana.jpeg" width="900" />
   </center>
 
-- **Batch Analysis**: Enables deep dives into historical data using complex queries via Hive, with results visualized in Power BI.
+- **Batch Analysis**: Enables deep dives into historical data using complex queries via `Hive`, with results visualized in `Power BI`.
 
   <center>
       <img src="image/powerbi.jpeg" width="900" />
