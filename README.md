@@ -259,22 +259,30 @@ The system is divided into several layers, each responsible for specific tasks w
 
 **9.2 Connect to Cassandra**
 - Open Cassandra source and connection settings:
-```
-Host: <ip>:9042
-Keyspace: loganalysis
-Consistency: ONE
-Credentials: admin
-Password: admin
-```
+    ```
+    Host: <ip>:9042
+    Keyspace: loganalysis
+    Consistency: ONE
+    Credentials: admin
+    Password: admin
+    ```
 
   <center>
       <img src="Project/image/cassandra-connector.jpeg" width="900" />
   </center>
 
+**9.2 Create Dashboard from Cassandra source**
+- Add dashboard and custom viusal:
 
-4. Use Spark and Hive for batch processing and querying historical data.
-5. Set up Grafana dashboards for real-time monitoring.
-6. Generate periodic reports using Power BI.
+  <center>
+      <img src="Project/image/createDashboard.jpeg" width="900" />
+  </center>
+
+- Arrange dashboard:
+
+  <center>
+      <img src="Project/image/grafanaF.jpeg" width="900" />
+  </center>
 
 ### Configuration
 - Configure NiFi to route logs to Kafka.
@@ -295,7 +303,16 @@ Password: admin
 ## Results and Analysis
 
 - **Real-time Monitoring**: Provides immediate insights through Grafana dashboards with critical event alerts.
+
+  <center>
+      <img src="Project/image/grafana.jpeg" width="900" />
+  </center>
+
 - **Batch Analysis**: Enables deep dives into historical data using complex queries via Hive, with results visualized in Power BI.
+
+  <center>
+      <img src="Project/image/powerbi.jpeg" width="900" />
+  </center>
 
 ## Notes and Considerations
 
