@@ -13,6 +13,10 @@ This dataset is particularly valuable for several reasons. First, it captures a 
 ## System Architecture
 The system is divided into several layers, each responsible for specific tasks within the log analytics process:
 
+<center>
+    <img src="Project/image/overview.jpeg" width="900" />
+</center>
+
 ### Ingestion Layer
 - **Apache NiFi**: Efficiently ingests NASA logs from various sources, enabling flexible and scalable data flow management.
 
@@ -34,7 +38,7 @@ The system is divided into several layers, each responsible for specific tasks w
 
 ## Technologies Used
 
-- **Operating System**: Ubuntu Server 24.04 LTS
+- **Operating System**: Ubuntu Server, Window
 - **Programming Languages**: Python
 - **Libraries and Frameworks**: 
   - Apache NiFi
@@ -58,13 +62,13 @@ The system is divided into several layers, each responsible for specific tasks w
 - Apache Hive
 - Apache NiFi
 - Grafana
-- Power BI
+- Power BI (Window)
 
 ### Installation
 - Follow the official documentation to install the required components on Ubuntu Server.
 
 ### Running the Project
-### 1. Apache Cassandra
+### 1. Start Apache Cassandra
 **1.1 Run Cassandra server**
   ```
   cassandra -f
@@ -113,7 +117,7 @@ The system is divided into several layers, each responsible for specific tasks w
   ```
   TRUNCATE TABLE loganalysis.nasalog;
   ```
-### 2. Apache Kafka
+### 2. Start Apache Kafka
 **2.1 Run Kafka server**
 - Generate a new cluster ID:
   ```
@@ -151,7 +155,7 @@ The system is divided into several layers, each responsible for specific tasks w
     --topic nasa_log
     --bootstrap-server localhost:9092
   ```
-### 3. Apache Hadoop
+### 3. Start Apache Hadoop
 **3.1 Configure Hadoop**
 - Follow instructions: [HadoopSingleCluster](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html)
   
@@ -164,21 +168,110 @@ The system is divided into several layers, each responsible for specific tasks w
   ```
   hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.1.jar pi 4 100
   ```
-### 4. Apache NiFi
-**3.1 Run Nifi**
+### 4. Start Apache NiFi
+**4.1 Run Nifi**
 - Run the NiFi server:
   ```
   nifi.sh start
   ```
 - Open port 8443: Ensure NiFi’s web interface is accessible at [https://localhost:8443/nifi](https://localhost:8443/nifi).
 
-**3.2 Create workflow**
+**4.2 Create workflow**
 - Access NiFi’s web UI:
   ```
   https://localhost:8443/nifi
   ```
-- Create a Workflow:
+- Create and run a workflow follow:
   
+  <center>
+    <img src="Project/image/nifi.jpeg" width="900" />
+  </center>
+
+### 5. Load Streaming Data into Cassandra and HDFS:
+- Submit Spark applications for Data Streaming Processing:
+
+  ```
+  spark-submit
+    --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.0,com.datastax.spark:spark-cassandra-connector_2.12:3.2.0,org.apache.kafka:kafka-clients:3.2.0
+    --master yarn
+    --deploy-mode cluster
+    streaming.py
+  ```
+
+### 6. Start Apache Hive
+**6.1 Configure Hive**
+- Follow instructions: [HiveGettingStarted](https://cwiki.apache.org/confluence/display/Hive/GettingStarted)
+  
+**6.2 Start the Hive services**
+- Run the schematool initialization:
+  ```
+    schematool -dbType <db type> -initSchema
+  ```
+- Start the Hive Metastore service:
+  ```
+  hive --service metastore
+  ```
+- Start thrift server in Spark:
+  ```
+  start-thiftserver.sh
+  ```
+### 7. Process Data and Load into Hive:
+- Submit Spark applications for Data Processing:
+  
+  ```
+  spark-submit
+    --master yarn
+    --deploy-mode cluster
+    load.py
+  ```
+
+### 8. Visual periodic visualizations with Power BI
+**8.1 Start Power BI**
+- Open Power BI with other machine in Window OS
+- Start Power BI Desktop and create report
+
+**8.2 Get data from Hive**
+- Select Spark and connect:
+  ```
+  Server: http://<id>:10000/cliservice
+  Protocol: HTTP
+  Data Connectivity mode: DirectQuery
+  ```
+- Load data from table nasa_log.log
+  <center>
+      <img src="Project/image/getdataPB.jpeg" width="900" />
+  </center>
+
+**8.3 Build visual**
+
+- Choose visual and attribute to build visual
+
+  <center>
+      <img src="Project/image/visualBI.jpeg" width="900" />
+  </center>
+
+### 9. Create Real-time visualizations with Grafana
+
+**9.1 Start Grafana service**
+  ```
+  sudo systemctl start grafana-server
+  ```
+
+**9.2 Connect to Cassandra**
+- Open Cassandra source and connection settings:
+```
+Host: <ip>:9042
+Keyspace: loganalysis
+Consistency: ONE
+Credentials: admin
+Password: admin
+```
+
+  <center>
+      <img src="Project/image/cassandra-connector.jpeg" width="900" />
+  </center>
+
+
 4. Use Spark and Hive for batch processing and querying historical data.
 5. Set up Grafana dashboards for real-time monitoring.
 6. Generate periodic reports using Power BI.
