@@ -1,4 +1,47 @@
 # BIG DATA PROJECT: NASA Log Analytics Process
+# Table of Contents
+
+I. **[Project Objective](#project-objective)**
+
+II. **[Datasets Selection](#datasets-selection)**
+
+III. **[System Architecture](#system-architecture)**
+   - [Ingestion Layer](#ingestion-layer)
+   - [Speed Layer](#speed-layer)
+   - [Batch Layer](#batch-layer)
+   - [Serving Layer](#serving-layer)
+   - [Analytics Layer](#analytics-layer)
+     
+IV. **[Technologies Used](#technologies-used)**
+
+V. **[Installation and Deployment](#installation-and-deployment)**
+   - [System Requirements](#system-requirements)
+   - [Installation](#installation)
+   - **[Running the Project](#running-the-project)**
+     - [1. Start Apache Cassandra](#1-start-apache-cassandra)
+     - [2. Start Apache Kafka](#2-start-apache-kafka)
+     - [3. Start Apache Hadoop](#3-start-apache-hadoop)
+     - [4. Start Apache NiFi](#4-start-apache-nifi)
+     - [5. Load Streaming Data into Cassandra and HDFS](#5-load-streaming-data-into-cassandra-and-hdfs)
+     - [6. Start Apache Hive](#6-start-apache-hive)
+     - [7. Process Data and Load into Hive](#7-process-data-and-load-into-hive)
+     - [8. Visual Periodic Visualizations with Power BI](#8-visual-periodic-visualizations-with-power-bi)
+     - [9. Create Real-time Visualizations with Grafana](#9-create-real-time-visualizations-with-grafana)
+       
+VI. **[Troubleshooting](#troubleshooting)**
+   - **[Common Issues](#common-issues)**
+   - **[Logs and Monitoring](#logs-and-monitoring)**
+     
+VII. **[Usage](#usage)**
+
+VIII. **[Results and Analysis](#results-and-analysis)**
+
+IX. **[Future Work](#future-work)**
+
+X. **[References](#references)**
+
+XI. **[Authors](#authors)**
+
 
 # Project Objective
 
