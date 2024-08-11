@@ -102,20 +102,27 @@ The system is divided into several layers, each responsible for specific tasks w
 ## Running the Project
 ### 1. Start Apache Cassandra
 **1.1 Run Cassandra server**
+
   ```
   cassandra -f
   ```
+
 **1.2 Create a Keyspace and Table**
 - Access the Cassandra Query Language (CQL) shell:
+  
   ```
   cqlsh -u cassandra -p cassandra
   ```
+  
 - Create a keyspace:
+  
   ```
   CREATE KEYSPACE IF NOT EXISTS loganalysis
     WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};
   ```
+  
 - Create a table:
+  
   ```
   CREATE TABLE loganalysis.nasalog (
       host text,
@@ -145,26 +152,36 @@ The system is divided into several layers, each responsible for specific tasks w
       AND read_repair = 'BLOCKING'
       AND speculative_retry = '99p';
   ```
+  
 - Truncate table:
+  
   ```
   TRUNCATE TABLE loganalysis.nasalog;
   ```
+  
 ### 2. Start Apache Kafka
 **2.1 Run Kafka server**
 - Generate a new cluster ID:
+  
   ```
   kafka-storage.sh random-uuid
   ```
+  
 - Generate the log storage:
+  
   ```
   kafka-storage.sh format -t <uuid> -c config/kraft/server.properties
   ```
+
 - Start Kafka Server:
+  
   ```
   kafka-server-start.sh config/kraft/server.properties
   ```
+  
 **2.2 Create a Kafka Topic**
 - Use the Kafka command-line tool to create a topic:
+  
   ```
   kafka-topics.sh
     --create
@@ -174,45 +191,58 @@ The system is divided into several layers, each responsible for specific tasks w
     --replication-factor 1
     --if-not-exists
   ```
+  
 - List topic:
+  
   ```
   kafka-topics.sh
     --list
     --bootstrap-server localhost:9092
   ```
+
 - Describe topic:
+  
   ```
   kafka-topics.sh
     --describe
     --topic nasa_log
     --bootstrap-server localhost:9092
   ```
+  
 ### 3. Start Apache Hadoop
 **3.1 Configure Hadoop**
 - Follow instructions: [HadoopSingleCluster](https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html)
   
 **3.2 Start Hadoop services**
 - Use the following commands:
+  
   ```
   start-all.sh
   ```
+  
 - Run Example:
+  
   ```
   hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-3.3.1.jar pi 4 100
   ```
+  
 ### 4. Start Apache NiFi
 **4.1 Run Nifi**
 - Run the NiFi server:
+  
   ```
   nifi.sh start
   ```
+  
 - Open port 8443: Ensure NiFi’s web interface is accessible at [https://localhost:8443/nifi](https://localhost:8443/nifi).
 
 **4.2 Create workflow**
 - Access NiFi’s web UI:
+  
   ```
   https://localhost:8443/nifi
   ```
+  
 - Create and run a workflow follow:
   
   <center>
@@ -236,17 +266,23 @@ The system is divided into several layers, each responsible for specific tasks w
   
 **6.2 Start the Hive services**
 - Run the schematool initialization:
+  
   ```
     schematool -dbType <db type> -initSchema
   ```
+
 - Start the Hive Metastore service:
+  
   ```
   hive --service metastore
   ```
+  
 - Start thrift server in Spark:
+  
   ```
   start-thiftserver.sh
   ```
+  
 ### 7. Process Data and Load into Hive:
 - Submit Spark applications for Data Processing:
   
@@ -264,11 +300,13 @@ The system is divided into several layers, each responsible for specific tasks w
 
 **8.2 Get data from Hive**
 - Select Spark and connect:
+  
   ```
   Server: http://<id>:10000/cliservice
   Protocol: HTTP
   Data Connectivity mode: DirectQuery
   ```
+  
 - Load data from table nasa_log.log
   <center>
       <img src="Project/image/getdataPB.jpeg" width="900" />
@@ -285,12 +323,14 @@ The system is divided into several layers, each responsible for specific tasks w
 ### 9. Create Real-time visualizations with Grafana
 
 **9.1 Start Grafana service**
+
   ```
   sudo systemctl start grafana-server
   ```
 
 **9.2 Connect to Cassandra**
 - Open Cassandra source and connection settings:
+  
     ```
     Host: <ip>:9042
     Keyspace: loganalysis
