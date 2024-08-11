@@ -67,7 +67,7 @@ The system is divided into several layers, each responsible for specific tasks w
 
 # Technologies Used
 
-- **Operating System**: The project is deployed on `Ubuntu Server` for the backend processes, with some components like `Power BI` running on Windows.
+- **Operating System**: The project is deployed on `Ubuntu Server` for the backend processes, with a component like `Power BI` running on Windows.
 - **Programming Languages**: `Python` is the primary programming language used for developing the various components of the pipeline.
 - **Libraries and Frameworks**: 
   - `Apache NiFi` for data ingestion.
