@@ -43,7 +43,7 @@ The logfile format is as follows:
 The system is divided into several layers, each responsible for specific tasks within the log analytics process:
 
 <center>
-    <img src="Project/image/overview.jpeg" width="900" />
+    <img src="image/overview.jpeg" width="900" />
 </center>
 
 ## Ingestion Layer
@@ -246,7 +246,7 @@ The system is divided into several layers, each responsible for specific tasks w
 - Create and run a workflow follow:
   
   <center>
-    <img src="Project/image/nifi.jpeg" width="900" />
+    <img src="image/nifi.jpeg" width="900" />
   </center>
 
 ### 5. Load Streaming Data into Cassandra and HDFS:
@@ -309,7 +309,7 @@ The system is divided into several layers, each responsible for specific tasks w
   
 - Load data from table nasa_log.log
   <center>
-      <img src="Project/image/getdataPB.jpeg" width="900" />
+      <img src="image/getdataPB.jpeg" width="900" />
   </center>
 
 **8.3 Build visual**
@@ -317,7 +317,7 @@ The system is divided into several layers, each responsible for specific tasks w
 - Choose visual and attribute to build visual
 
   <center>
-      <img src="Project/image/visualBI.jpeg" width="900" />
+      <img src="image/visualBI.jpeg" width="900" />
   </center>
 
 ### 9. Create Real-time visualizations with Grafana
@@ -340,20 +340,20 @@ The system is divided into several layers, each responsible for specific tasks w
     ```
 
   <center>
-      <img src="Project/image/cassandra-connector.jpeg" width="900" />
+      <img src="image/cassandra-connector.jpeg" width="900" />
   </center>
 
 **9.2 Create Dashboard from Cassandra source**
 - Add dashboard and custom viusal:
 
   <center>
-      <img src="Project/image/createDashboard.jpeg" width="900" />
+      <img src="image/createDashboard.jpeg" width="900" />
   </center>
 
 - Arrange dashboard:
 
   <center>
-      <img src="Project/image/grafanaF.jpeg" width="900" />
+      <img src="image/grafanaF.jpeg" width="900" />
   </center>
 
 ## Troubleshooting
@@ -410,13 +410,13 @@ Cassandra logs reside in the /var/log/cassandra directory. Review these logs for
 - **Real-time Monitoring**: Provides immediate insights through Grafana dashboards with critical event alerts.
 
   <center>
-      <img src="Project/image/grafana.jpeg" width="900" />
+      <img src="image/grafana.jpeg" width="900" />
   </center>
 
 - **Batch Analysis**: Enables deep dives into historical data using complex queries via Hive, with results visualized in Power BI.
 
   <center>
-      <img src="Project/image/powerbi.jpeg" width="900" />
+      <img src="image/powerbi.jpeg" width="900" />
   </center>
 
 # Future Work
