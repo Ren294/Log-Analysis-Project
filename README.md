@@ -38,19 +38,21 @@ The system is divided into several layers, each responsible for specific tasks w
 
 ## Technologies Used
 
-- **Operating System**: Ubuntu Server, Window
-- **Programming Languages**: Python
+- **Operating System**: The project is deployed on Ubuntu Server for the backend processes, with some components like Power BI running on Windows.
+- **Programming Languages**: Python is the primary programming language used for developing the various components of the pipeline.
 - **Libraries and Frameworks**: 
-  - Apache NiFi
-  - Apache Kafka
-  - Apache Spark 
-  - Hadoop HDFS
-  - Apache Hive
-  - Apache Cassandra
-  - Grafana
-  - Power BI
-- **Database**: Cassandra for real-time data storage and Hive for batch queries
-
+  - Apache NiFi for data ingestion.
+  - Apache Apache Kafka for real-time data streaming.
+  - Apache Spark for both real-time and batch data processing.
+  - Hadoop HDFS for distributed data storage.
+  - Apache Hive for data warehousing and querying.
+  - Apache Cassandra for fast, distributed data storage.
+  - Grafana for real-time data visualization.
+  - Power BI for creating detailed reports and dashboards.
+- **Database**:
+  - Cassandra is used for real-time data storage
+  - Hive is employed for executing batch queries against the stored data.
+  
 ## Installation and Deployment
 
 ### System Requirements
@@ -65,7 +67,8 @@ The system is divided into several layers, each responsible for specific tasks w
 - Power BI (Window)
 
 ### Installation
-- Follow the official documentation to install the required components on Ubuntu Server.
+- Follow the official documentation for each component to install them on an Ubuntu Server.
+- The installation involves setting up Java, Python, and the big data tools (Hadoop, Spark, Kafka, etc.) to ensure all components are correctly configured and ready for deployment.
 
 ### Running the Project
 ### 1. Start Apache Cassandra
@@ -284,11 +287,44 @@ The system is divided into several layers, each responsible for specific tasks w
       <img src="Project/image/grafanaF.jpeg" width="900" />
   </center>
 
-### Configuration
-- Configure NiFi to route logs to Kafka.
-- Set up Kafka topics and configure Spark Streaming to consume from these topics.
-- Adjust Hive configurations for efficient querying.
-- Integrate Grafana with Cassandra for real-time visualization.
+### Troubleshooting
+
+### Common Issues
+
+**1. Kafka Broker Connection Issues**
+- Ensure the Kafka broker is correctly configured and that the server.properties file contains the correct settings.
+Check that the broker is running and reachable from the network.
+
+**2. Cassandra Connectivity Issues**
+- Ensure the Cassandra server is up and running, and that the correct IP address and port are specified in the connection settings.
+- Validate that the keyspace and table have been created as required.
+
+**3. Hadoop Resource Manager Not Starting**
+- Verify that Java is correctly installed and configured on your system.
+- Ensure that HDFS and YARN services are correctly initialized and that no other conflicting services are running on the same ports.
+
+### Logs and Monitoring
+
+**1. Apache NiFi Logs**
+
+NiFi logs are stored in the logs directory within the NiFi installation directory. Check these logs for detailed error messages and debugging information.
+
+    cd $NIFI_HOME/logs/
+    
+**2. Kafka Logs**
+Kafka logs are located in the logs directory within the Kafka installation. Inspect these logs to diagnose issues related to message delivery and broker connectivity.
+
+    cd $KAFKA_HOME/logs/
+    
+**3. Spark Logs**
+Spark logs can be found in the logs directory of your Spark installation. These logs contain information about the execution of your Spark applications, including details of any errors encountered.
+
+    cd $SPARK_HOME/logs/
+    
+**4. Cassandra Logs**
+Cassandra logs reside in the /var/log/cassandra directory. Review these logs for any issues related to data storage and query execution.
+    
+    cd $CASSANDRA_HOME/logs/
 
 ## Usage
 
@@ -314,20 +350,33 @@ The system is divided into several layers, each responsible for specific tasks w
       <img src="Project/image/powerbi.jpeg" width="900" />
   </center>
 
-## Notes and Considerations
+## Future Work
 
-- Ensure optimal Kafka and Spark configurations for performance.
-- Regularly monitor HDFS storage capacity to prevent data overflow.
-- Customize Grafana dashboards to meet specific monitoring needs.
+The project is designed to be extensible and scalable, with several avenues for future enhancement:
+
+- **Advanced Machine Learning Models**: Incorporate machine learning models to predict future server load and detect anomalies in real-time.
+  
+- **Integration with Other Data Sources**: Extend the system to ingest and process logs from additional sources, such as application logs or network logs, to provide a more comprehensive view of system performance.
+  
+- **Deployment in a Distributed Environment**: Transition from a single-node setup to a fully distributed deployment across multiple nodes or cloud environments, utilizing containerization technologies like Docker or Kubernetes.
+  
+- **Enhanced Visualization**: Develop more complex dashboards and reports in Grafana and Power BI, enabling deeper insights and more effective monitoring.
 
 ## References
 
 - [Apache NiFi Documentation](https://nifi.apache.org/docs.html)
+  
 - [Apache Kafka Documentation](https://kafka.apache.org/documentation/)
+  
 - [Apache Spark Documentation](https://spark.apache.org/docs/latest/)
+  
 - [Hadoop Documentation](https://hadoop.apache.org/docs/stable/)
+  
 - [Hive Documentation](https://cwiki.apache.org/confluence/display/Hive/Home)
+  
 - [Cassandra Documentation](https://cassandra.apache.org/doc/latest/)
+
+- [Grafana Documentation](https://grafana.com/docs/grafana/latest/)
 
 ## Contribution
 
