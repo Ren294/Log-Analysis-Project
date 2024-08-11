@@ -1,42 +1,47 @@
-# Big Data Project: NASA Log Analytics Process
+# BIG DATA PROJECT: NASA Log Analytics Process
 
-## Project Objective
+# Project Objective
 
 The primary goal of this project is to develop a scalable and fault-tolerant log analytics pipeline based on the Lambda architecture. The system ingests, processes, and analyzes NASA server logs in both real-time and batch modes. This enables immediate insights for real-time monitoring and generates comprehensive reports for periodic analysis.
 
-## Datasets Selection
+# Datasets Selection
 NASA access log dataset 1995:
 - <a href = https://ita.ee.lbl.gov/html/contrib/NASA-HTTP.html> Actual NASA Logs </a>
 - <a href = https://www.kaggle.com/souhagaa/nasa-access-log-dataset-1995/download> Kaggle </a>
 
 This dataset is particularly valuable for several reasons. First, it captures a high volume of real-world web traffic, providing a realistic basis for our analysis. Secon d, the data spans different times of the day and days of the week, enabling us to id entify patterns and trends in server usage. Lastly, the inclusion of various HTTP res ponse codes and byte sizes allows us to assess not only the traffic but also the ser ver's performance and potential issues such as error rates and load.
-## System Architecture
+
+The logfile format is as follows:
+
+    remotehost rfc931 authuser [date] "request" status bytes
+    
+# System Architecture
 The system is divided into several layers, each responsible for specific tasks within the log analytics process:
 
 <center>
     <img src="Project/image/overview.jpeg" width="900" />
 </center>
 
-### Ingestion Layer
+## Ingestion Layer
 - **Apache NiFi**: Efficiently ingests NASA logs from various sources, enabling flexible and scalable data flow management.
 
-### Speed Layer
+## Speed Layer
 - **Apache Kafka**: Serves as a high-throughput, low-latency message broker, handling real-time data streams.
 - **Apache Spark Streaming**: Processes data streams in real-time, enabling immediate analytics and rapid response to events. Integrates seamlessly with Kafka for continuous log processing.
 
-### Batch Layer
+## Batch Layer
 - **Hadoop HDFS**: Acts as the primary storage for large volumes of log data, ensuring high availability and scalability.
 - **Apache Spark**: Performs batch processing on data stored in HDFS, facilitating complex data analysis tasks.
 - **Apache Hive**: Provides a data warehouse infrastructure, enabling efficient querying and analysis of large datasets stored in HDFS.
 
-### Serving Layer
+## Serving Layer
 - **Apache Cassandra**: Stores processed data with fast read/write capabilities, particularly useful for real-time analytics.
 
-### Analytics Layer
+## Analytics Layer
 - **Grafana**: Offers real-time visualization of log data through dynamic dashboards and alerts.
 - **Power BI**: Generates detailed daily, monthly, and periodic reports, providing deep insights through comprehensive visualizations.
 
-## Technologies Used
+# Technologies Used
 
 - **Operating System**: The project is deployed on Ubuntu Server for the backend processes, with some components like Power BI running on Windows.
 - **Programming Languages**: Python is the primary programming language used for developing the various components of the pipeline.
@@ -53,9 +58,9 @@ The system is divided into several layers, each responsible for specific tasks w
   - Cassandra is used for real-time data storage
   - Hive is employed for executing batch queries against the stored data.
   
-## Installation and Deployment
+# Installation and Deployment
 
-### System Requirements
+## System Requirements
 - Java 8+
 - Python 3.7+
 - Apache Hadoop
@@ -66,11 +71,11 @@ The system is divided into several layers, each responsible for specific tasks w
 - Grafana
 - Power BI (Window)
 
-### Installation
+## Installation
 - Follow the official documentation for each component to install them on an Ubuntu Server.
 - The installation involves setting up Java, Python, and the big data tools (Hadoop, Spark, Kafka, etc.) to ensure all components are correctly configured and ready for deployment.
 
-### Running the Project
+## Running the Project
 ### 1. Start Apache Cassandra
 **1.1 Run Cassandra server**
   ```
@@ -287,7 +292,7 @@ The system is divided into several layers, each responsible for specific tasks w
       <img src="Project/image/grafanaF.jpeg" width="900" />
   </center>
 
-### Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -326,7 +331,7 @@ Cassandra logs reside in the /var/log/cassandra directory. Review these logs for
     
     cd $CASSANDRA_HOME/logs/
 
-## Usage
+# Usage
 
 - **Input Data**: NASA server logs, including access logs, error logs, and application logs.
 - **Running Data Processing Jobs**:
@@ -336,7 +341,7 @@ Cassandra logs reside in the /var/log/cassandra directory. Review these logs for
   - Real-time metrics displayed on Grafana dashboards.
   - Aggregated and historical reports available in Power BI.
 
-## Results and Analysis
+# Results and Analysis
 
 - **Real-time Monitoring**: Provides immediate insights through Grafana dashboards with critical event alerts.
 
@@ -350,7 +355,7 @@ Cassandra logs reside in the /var/log/cassandra directory. Review these logs for
       <img src="Project/image/powerbi.jpeg" width="900" />
   </center>
 
-## Future Work
+# Future Work
 
 The project is designed to be extensible and scalable, with several avenues for future enhancement:
 
@@ -362,7 +367,7 @@ The project is designed to be extensible and scalable, with several avenues for 
   
 - **Enhanced Visualization**: Develop more complex dashboards and reports in Grafana and Power BI, enabling deeper insights and more effective monitoring.
 
-## References
+# References
 
 - [Apache NiFi Documentation](https://nifi.apache.org/docs.html)
   
@@ -378,6 +383,8 @@ The project is designed to be extensible and scalable, with several avenues for 
 
 - [Grafana Documentation](https://grafana.com/docs/grafana/latest/)
 
-## Contribution
-
-To contribute, fork the repository, make your changes, and submit a pull request. Issues and suggestions for improvement are welcome.
+# Authors
+Nguyen Trung Nghia
+- Contact: trungnghia294@gmail.com
+- GitHub: [Ren294](https://github.com/Ren294)
+- Linkedln: [tnghia294](https://www.linkedin.com/in/tnghia294/)
