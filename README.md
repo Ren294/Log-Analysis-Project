@@ -103,7 +103,7 @@ The system is divided into several layers, each responsible for specific tasks w
 ### 1. Start `Apache Cassandra`
 **1.1 Run Cassandra server**
 
-  ```
+  ```shell
   cassandra -f
   ```
 
