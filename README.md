@@ -97,7 +97,7 @@ The system is divided into several layers, each responsible for specific tasks w
 
 ## Installation
 - Follow the [official documentation](#references) for each component to install them on an Ubuntu Server.
-- The installation involves setting up Java, Python, and the big data tools (Hadoop, Spark, Kafka, etc.) to ensure all components are correctly configured and ready for deployment.
+- The installation involves setting up `Java`, `Python`, and the big data tools (`Hadoop`, `Spark`, `Kafka`, etc.) to ensure all components are correctly configured and ready for deployment.
 
 ## Running the Project
 ### 1. Start `Apache Cassandra`
@@ -430,9 +430,9 @@ The project is designed to be extensible and scalable, with several avenues for 
   
 - **Integration with Other Data Sources**: Extend the system to ingest and process logs from additional sources, such as application logs or network logs, to provide a more comprehensive view of system performance.
   
-- **Deployment in a Distributed Environment**: Transition from a single-node setup to a fully distributed deployment across multiple nodes or cloud environments, utilizing containerization technologies like Docker or Kubernetes.
+- **Deployment in a Distributed Environment**: Transition from a single-node setup to a fully distributed deployment across multiple nodes or cloud environments, utilizing containerization technologies like `Docker` or `Kubernetes`.
   
-- **Enhanced Visualization**: Develop more complex dashboards and reports in Grafana and Power BI, enabling deeper insights and more effective monitoring.
+- **Enhanced Visualization**: Develop more complex dashboards and reports in `Grafana` and `Power BI`, enabling deeper insights and more effective monitoring.
 
 # References
 
