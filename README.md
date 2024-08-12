@@ -422,7 +422,7 @@ Cassandra logs reside in the /var/log/cassandra directory. Review these logs for
       <img src="image/powerbi.jpeg" width="900" />
   </center>
 
-# Future Work 🛠
+# Future Work
 
 The project is designed to be extensible and scalable, with several avenues for future enhancement:
 
@@ -434,7 +434,7 @@ The project is designed to be extensible and scalable, with several avenues for 
   
 - **Enhanced Visualization**: Develop more complex dashboards and reports in Grafana and Power BI, enabling deeper insights and more effective monitoring.
 
-# References 🔗
+# References
 
 - [Apache NiFi Documentation](https://nifi.apache.org/docs.html)
   
@@ -450,7 +450,7 @@ The project is designed to be extensible and scalable, with several avenues for 
 
 - [Grafana Documentation](https://grafana.com/docs/grafana/latest/)
 
-# Authors 🤵
+# Authors
 Nguyen Trung Nghia
 - Contact: trungnghia294@gmail.com
 - GitHub: [Ren294](https://github.com/Ren294)
