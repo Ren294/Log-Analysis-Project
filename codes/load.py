@@ -1,4 +1,3 @@
-from pyspark import SparkContext, SparkConf
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
@@ -10,24 +9,37 @@ spark = SparkSession.builder \
     .config("spark.sql.catalogImplementation", "hive")\
     .getOrCreate()
 
-df = spark.read.csv("/output/nasa_log", inferSchema=True)
+schema = StructType([
+    StructField("host", StringType(), True),
+    StructField("time", StringType(), True),
+    StructField("method", StringType(), True),
+    StructField("url", StringType(), True),
+    StructField("response", IntegerType(), True),
+    StructField("bytes", IntegerType(), True),
+    StructField("time_added", StringType(), True),
+    StructField("extension", StringType(), True)
+])
+
+df = spark.read.csv("hdfs://localhost:9000/output/nasa_log", schema=schema, header=False)
+
 f_df = df.select(
-    col("_c0").alias("host"),
-    from_unixtime(col("_c1")).alias("time"),
-    col("_c2").alias("method"),
-    col("_c3").alias("url"),
-    col("_c4").cast("int").alias("response"),
-    col("_c5").alias("bytes"),
-    from_unixtime(col("_c6")).alias("time_added"),
-    col("_c7").alias("extension")
+    col("host"),
+    to_timestamp(col("time"), "dd/MMM/yyyy:HH:mm:ss Z").alias("time"),
+    col("method"),
+    col("url"),
+    col("response"),
+    col("bytes"),
+    to_timestamp(col("time_added"), "yyyy-MM-dd HH:mm:ss").alias("time_added"),
+    col("extension")
 )
-fa_df = f_df\
-  .withColumn('ts_year', year(col("time")).cast(IntegerType()))\
-  .withColumn('ts_month', month(col("time")).cast(IntegerType()))\
-  .withColumn('ts_day', dayofmonth(col("time")).cast(IntegerType()))\
-  .withColumn('ts_hour', hour(col("time")).cast(IntegerType()))\
-  .withColumn("ts_minute", minute(col("time")).cast(IntegerType()))\
-  .withColumn("ts_sec", second(col("time")).cast(IntegerType())) \
-  .withColumn("ts_dayOfWeek", dayofweek(col("time")).cast(IntegerType()))
-  
+
+fa_df = f_df \
+    .withColumn('ts_year', year(col("time")).cast(IntegerType()))\
+    .withColumn('ts_month', month(col("time")).cast(IntegerType()))\
+    .withColumn('ts_day', dayofmonth(col("time")).cast(IntegerType()))\
+    .withColumn('ts_hour', hour(col("time")).cast(IntegerType()))\
+    .withColumn("ts_minute", minute(col("time")).cast(IntegerType()))\
+    .withColumn("ts_sec", second(col("time")).cast(IntegerType())) \
+    .withColumn("ts_dayOfWeek", dayofweek(col("time")).cast(IntegerType()))
+
 fa_df.write.mode("append").saveAsTable("nasa_log.log")
