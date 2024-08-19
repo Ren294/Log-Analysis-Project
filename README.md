@@ -73,15 +73,14 @@ The system is divided into several layers, each responsible for specific tasks w
   - `Apache NiFi` for data ingestion.
   - `Apache Kafka` for real-time data streaming.
   - `Apache Spark` for both real-time and batch data processing.
-  - `Hadoop HDFS` for distributed data storage.
   - `Apache Hive` for data warehousing and querying.
-  - `Apache Cassandra` for fast, distributed data storage.
-  - `Grafana` for real-time data visualization.
-  - `Power BI` for creating detailed reports and dashboards.
-- **Database**:
+- **Storage**:
   - `Cassandra` is used for real-time data storage
-  - `Hive` is employed for executing batch queries against the stored data.
-  
+  - `Hadoop HDFS` for distributed data storage.
+- **Visualization**
+   - `Grafana` for real-time data visualization.
+  - `Power BI` for creating detailed reports and dashboards.
+
 # Installation and Deployment
 
 ## System Requirements
