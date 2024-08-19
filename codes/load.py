@@ -14,6 +14,7 @@ schema = StructType([
     StructField("time", StringType(), True),
     StructField("method", StringType(), True),
     StructField("url", StringType(), True),
+    StructField("protocol", StringType(), True),
     StructField("response", IntegerType(), True),
     StructField("bytes", IntegerType(), True),
     StructField("time_added", StringType(), True),
@@ -27,9 +28,10 @@ f_df = df.select(
     to_timestamp(col("time"), "dd/MMM/yyyy:HH:mm:ss Z").alias("time"),
     col("method"),
     col("url"),
+    col("protocol"),
     col("response"),
     col("bytes"),
-    to_timestamp(col("time_added"), "yyyy-MM-dd HH:mm:ss").alias("time_added"),
+    to_timestamp(col("time_added"), "yyyy-MM-dd'T'HH:mm:ss.SSSXXX").alias("time_added"),
     col("extension")
 )
 
