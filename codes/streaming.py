@@ -1,4 +1,3 @@
-    
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark.sql import SparkSession
@@ -11,30 +10,36 @@ spark = SparkSession.builder \
     .config("spark.cassandra.auth.password", 'cassandra')\
     .getOrCreate()
 
-df = spark.readStream.format("kafka").option("kafka.bootstrap.servers", "localhost:9092").option("subscribe", "nasa_log").option("startingOffsets", "earliest").option("maxOffsetsPerTrigger", 10000).load()
+df = spark.readStream.format("kafka") \
+    .option("kafka.bootstrap.servers", "localhost:9092") \
+    .option("subscribe", "nasa_log") \
+    .option("startingOffsets", "earliest") \
+    .option("maxOffsetsPerTrigger", 10000) \
+    .load()
 
-split_logic = split(col("url"), "\\.").getItem(1)
 
 df = df.selectExpr("CAST(value AS STRING)")
 
 df_1 = df.select(
-    split(col("value"), ",").getItem(1).alias("host"),
-    from_unixtime(split(col("value"), ",").getItem(2)).cast("timestamp").alias("time"),
-    split(col("value"), ",").getItem(3).alias("method"),
-    split(col("value"), ",").getItem(4).alias("url"),
-    split(col("value"), ",").getItem(5).alias("response").cast(IntegerType()),
-    split(col("value"), ",").getItem(6).alias("bytes").cast(IntegerType()),
+    regexp_extract(col("value"), r'^(\S+)', 1).alias("remotehost"),
+    regexp_extract(col("value"), r'^\S+\s+\S+\s+\S+\s+\[([^\]]+)\]', 1).alias("date"),
+    regexp_extract(col("value"), r'\"(\S+)\s(\S+)\s*(\S*)\"', 1).alias("method"),
+    regexp_extract(col("value"), r'\"(\S+)\s(\S+)\s*(\S*)\"', 2).alias("url"),
+    regexp_extract(col("value"), r'\"(\S+)\s(\S+)\s*(\S*)\"', 3).alias("protocol"),
+    regexp_extract(col("value"), r'\s(\d{3})\s', 1).alias("status").cast(IntegerType()),
+    regexp_extract(col("value"), r'\s(\d+)$', 1).alias("bytes").cast(IntegerType())
 ).withColumn('time_added', unix_timestamp().cast("timestamp"))\
-.withColumn("extension", when(split_logic.isNull(), "None").otherwise(split_logic))
+.withColumn("extension", when(split(col("url"), "\\.").getItem(1).isNull(), "None")
+                                    .otherwise(split(col("url"), "\\.").getItem(1)))
 
-df_1 = df_1.na.drop(subset=["host", "time"])
+df_1 = df_1.na.drop(subset=["remotehost", "date"])
 
 def process_row(df, epoch_id):
     df.write\
-    .format("org.apache.spark.sql.cassandra")\
-    .mode('append')\
-    .options(table="nasalog", keyspace="loganalysis")\
-    .save()
+        .format("org.apache.spark.sql.cassandra")\
+        .mode('append')\
+        .options(table="nasalog", keyspace="loganalysis")\
+        .save()
     df.write.mode("append").csv("hdfs://localhost:9000/output/nasa_log")
 
 df_1 \
