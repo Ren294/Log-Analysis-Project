@@ -95,7 +95,7 @@ The system is divided into several layers, each responsible for specific tasks w
 - Power BI (Window)
 
 ## Installation
-- Follow the [official documentation](#references) for each component to install them on an Ubuntu Server.
+- Follow the [official documentation](#references) for each component to install them on an `Ubuntu Server`.
 - The installation involves setting up `Java`, `Python`, and the big data tools (`Hadoop`, `Spark`, `Kafka`, etc.) to ensure all components are correctly configured and ready for deployment.
 
 ## Running the Project
